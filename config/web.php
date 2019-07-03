@@ -2,11 +2,16 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$session = require __DIR__ . '/session.php';
+$errorHandler = require __DIR__ . '/errorHandler.php';
+$modules      = require __DIR__ . '/modules.php';
 
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log'
+    ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -23,9 +28,6 @@ $config = [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
         ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
@@ -34,15 +36,23 @@ $config = [
             'useFileTransport' => true,
         ],
         'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
+            'traceLevel'    =>  YII_DEBUG ? 3 : 0,
+            'targets'       => [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
             ],
         ],
-        'db' => $db,
+        'db'        =>  $db,
+        'session'   =>  $session,
+        'errorHandler' => $errorHandler,
+
+        'test_component'    =>  [
+            'class' =>  'app\components\test_component\TestComponent',
+            'name'  =>  '谭勇',
+            'age'   =>  24
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -52,6 +62,9 @@ $config = [
         ],
         */
     ],
+
+    'modules'   =>  $modules,
+
     'params' => $params,
 ];
 

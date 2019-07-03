@@ -1,17 +1,17 @@
 <?php
-namespace app\controllers\home\actions;
+namespace app\components\test_component;
 
 use Yii;
-use yii\base\Action;
-class TanyongAction extends Action
-{
+use yii\base\BaseObject;
 
+class TestComponent extends BaseObject
+{
     private $name;
     private $age;
 
-    public function run()
+    public function info()
     {
-        return "action tanyong run || name : ".$this->getName()." age : ".$this->getAge();
+        return "name : {$this->name} ; age : {$this->age}";
     }
 
     public function setName($name)

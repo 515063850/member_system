@@ -14,6 +14,24 @@ class IndexController extends Controller
     //@Override
     public $defaultAction = "main";
 
+    public function behaviors()
+    {
+        $parent_behaviors = parent::behaviors();
+
+        $behaviors = [
+            [
+                'class' =>  'app\components\test_filter\TestFilter',
+                'only'  =>  ['main','index']
+            ],
+            [
+                'class' =>  'app\components\test2_filter\Test2Filter',
+                'only'  =>  ['main','index']
+            ]
+        ];
+
+        return array_merge($parent_behaviors,$behaviors);
+    }
+
     public function actionMain()
     {
         return "default action";
